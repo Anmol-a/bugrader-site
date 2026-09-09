@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F2F4F7;
+  color: #10161F;
+}
+
+:focus-visible {
+  outline: 2px solid #B9862F;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sweep,
+  .animate-blip,
+  .animate-scan,
+  .animate-flow,
+  .animate-spin,
+  .animate-ping,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
