@@ -21,28 +21,29 @@ export async function POST(request: Request) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  try {
-    await resend.emails.send({
-      from: "BugRadar Contact Form <hello@bugradar.in>",
-      to: "hello@bugradar.in",
-      replyTo: body.email,
-      subject: `New inquiry from ${body.name}${body.company ? ` (${body.company})` : ""}`,
-      text: [
-        `Name: ${body.name}`,
-        `Email: ${body.email}`,
-        `Company: ${body.company ?? "—"}`,
-        "",
-        "What they sell / where it breaks:",
-        body.message,
-      ].join("\n"),
-    });
-  } catch (err) {
-    console.error("Resend send failed:", err);
+  const { data, error } = await resend.emails.send({
+    from: "BugRadar Contact Form <hello@bugradar.in>",
+    to: "hello@bugradar.in",
+    replyTo: body.email,
+    subject: `New inquiry from ${body.name}${body.company ? ` (${body.company})` : ""}`,
+    text: [
+      `Name: ${body.name}`,
+      `Email: ${body.email}`,
+      `Company: ${body.company ?? "—"}`,
+      "",
+      "What they sell / where it breaks:",
+      body.message,
+    ].join("\n"),
+  }).catch((err) => ({ data: null, error: err }));
+
+  if (error) {
+    console.error("Resend send failed:", error);
     return NextResponse.json(
       { ok: false, error: "Something went wrong sending your message. Please try again." },
       { status: 500 }
     );
   }
 
+  console.log("Resend accepted send, email id:", data?.id);
   return NextResponse.json({ ok: true });
 }

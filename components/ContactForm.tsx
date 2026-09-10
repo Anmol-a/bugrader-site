@@ -39,7 +39,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="border border-line rounded-lg p-6 text-[15px]">
-        Thanks — that's been received. We'll get back to you shortly.
+        <span className="font-display font-semibold">Signal received.</span> We read every message ourselves — expect a reply within one business day.
       </div>
     );
   }
