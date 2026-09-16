@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       `Name: ${body.name}`,
       `Email: ${body.email}`,
       `Company: ${body.company ?? "—"}`,
+      `Journeys flagged: ${Array.isArray(body.journeys) && body.journeys.length ? body.journeys.join(", ") : "—"}`,
       "",
       "What they sell / where it breaks:",
       body.message,
