@@ -20,6 +20,10 @@ export default function Pricing() {
             title="Pick your level of coverage."
             description="From a single pre-flight check to full-time coverage — start wherever your site actually needs it."
           />
+          <p className="flex items-center gap-2 text-[13.5px] text-ink-soft mt-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-clear shrink-0" />
+            No bots, no dashboards — a person checks every flow.
+          </p>
         </div>
       </section>
 
