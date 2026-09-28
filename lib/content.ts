@@ -285,3 +285,76 @@ export const demoIncident = [
 ];
 
 export const contactEmail = "hello@bugradar.in";
+
+// Pricing page content
+export const pricingTiers = [
+  {
+    tier: "One-time",
+    title: "Pre-Flight Audit",
+    price: "₹25,000–₹40,000",
+    period: null as string | null,
+    tagline: "A full manual pass before you trust your site with traffic.",
+    features: [
+      "Every major page and buying journey tested by hand, not just scanned",
+      "Written report, ranked by severity, with exact repro steps",
+      "One screen-share walkthrough call",
+      "Delivered in 5 business days",
+    ],
+    note: "Fee credited in full toward Checkout Watch if you sign on within 30 days.",
+    cta: "Book an audit",
+    featured: false,
+  },
+  {
+    tier: "Monthly",
+    title: "Checkout Watch",
+    price: "₹25,000–₹40,000",
+    period: "/mo",
+    tagline: "We keep watching after the audit ends.",
+    features: [
+      "Scheduled checks plus regular manual passes on your critical journeys",
+      "Confirmed-failure alerts to Slack or email — only what's real, never noise",
+      "A monthly report",
+      "Fully managed — you never touch the code",
+    ],
+    note: null as string | null,
+    cta: "Start Checkout Watch",
+    featured: true,
+  },
+  {
+    tier: "One-time project",
+    title: "Control Tower Build",
+    price: "₹1.5–4 lakh",
+    period: null as string | null,
+    tagline: "Your own infrastructure, built once, run by your team.",
+    features: [
+      "A custom automation framework built around your actual business rules — coupons, bundles, subscriptions",
+      "Full handoff with documentation and training",
+      "You own it and run it going forward",
+    ],
+    note: "Want us to keep running it after handoff? Ask about ongoing management.",
+    cta: "Talk about a build",
+    featured: false,
+  },
+  {
+    tier: "Seasonal",
+    title: "Festive Sale Readiness Pack",
+    price: "₹30,000–₹50,000",
+    period: null as string | null,
+    tagline: "Before the traffic spikes, know it holds.",
+    features: [
+      "Checkout stress-tested under load",
+      "Discount-code conflict checks",
+      "COD/UPI edge cases specific to festive traffic",
+    ],
+    note: null as string | null,
+    cta: "Get festive-ready",
+    featured: false,
+  },
+];
+
+export const freeSnapshot = {
+  heading: "Not sure if anything's actually broken?",
+  body: "We'll find you one real bug on your live site, free, before you pay for anything.",
+  sub: "No report, no call — just proof, sent straight to you.",
+  cta: "Get a free find",
+};
