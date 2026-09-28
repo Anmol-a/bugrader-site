@@ -19,11 +19,12 @@ export default function Nav() {
     <header className="border-b border-line bg-paper sticky top-0 z-50">
       <div className="max-w-[1180px] mx-auto px-8">
         <nav className="flex items-center justify-between py-6">
-          <Link href="/" className="flex items-center gap-2.5 font-display font-semibold text-[19px]">
-            <span className="relative w-4 h-4">
-              <span className="absolute inset-[5px] bg-gold rounded-full" />
-              <span className="absolute inset-0 border border-gold rounded-full opacity-45" />
-            </span>
+          <Link href="/" className="flex items-center gap-3 font-display font-semibold text-[19px]">
+            <svg viewBox="0 0 100 100" className="w-9 h-9 shrink-0" aria-hidden="true">
+              <rect width="100" height="100" rx="22" className="fill-panel" />
+              <path d="M 46 58 L 65.7 20.9 A 42 42 0 0 1 87.8 62.4 Z" className="fill-gold" />
+              <circle cx="46" cy="58" r="5.5" className="fill-gold" />
+            </svg>
             BugRadar
           </Link>
 
