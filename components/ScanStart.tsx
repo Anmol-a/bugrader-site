@@ -53,12 +53,9 @@ export default function ScanStart() {
         <div className="text-alert text-[14px] mt-2">
           {err}
           {disputable && (
-            <>
-              {" "}
-              <a className="underline text-ink" href={`${SCAN_APP}?u=${encodeURIComponent(disputable)}`}>
-                Is {disputable} actually your Shopify store? Tell us →
-              </a>
-            </>
+            <a className="block mt-1.5 underline text-ink" href={`${SCAN_APP}?u=${encodeURIComponent(disputable)}`}>
+              Is {disputable} actually your Shopify store? Tell us →
+            </a>
           )}
         </div>
       )}
