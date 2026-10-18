@@ -6,25 +6,8 @@ import { useState } from "react";
 // dashboard, which queues it, runs it from our server and shows each check as it happens.
 export const SCAN_APP = "https://bugradar-dashboard.vercel.app/#/scan";
 
-const NOT_STORES =
-  /(^|\.)(wikipedia|google|youtube|facebook|instagram|twitter|x|linkedin|reddit|amazon|flipkart|myntra|github|gov|nic|edu|ac)\.[a-z.]+$|\.(gov|edu|mil)(\.[a-z]{2})?$/i;
-const RESTRICTED = /(porn|xxx|sex|adult|escort|casino|betting|bet365|gambl|rummy|poker|cannabis|weed|drugs?|vape|gun|weapon)/i;
-
-export function checkAddress(raw: string): { host?: string; error?: string } {
-  const s = raw.trim().toLowerCase();
-  if (!s) return { error: "Type your store's address, like yourstore.com" };
-  let host = "";
-  try {
-    host = new URL(/^https?:\/\//.test(s) ? s : `https://${s}`).hostname.replace(/^www\./, "");
-  } catch {
-    /* below */
-  }
-  if (!host || !/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(host) || /^\d+(\.\d+){3}$/.test(host))
-    return { error: "That doesn't look like a web address. Try yourstore.com" };
-  if (RESTRICTED.test(host)) return { error: "We can't check this site." };
-  if (NOT_STORES.test(host)) return { error: "This isn't an online store. BugRadar checks Shopify stores." };
-  return { host };
-}
+export { checkAddress } from "@/lib/storeAddress";
+import { checkAddress } from "@/lib/storeAddress";
 
 export default function ScanStart() {
   const [url, setUrl] = useState("");
