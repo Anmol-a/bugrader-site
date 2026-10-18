@@ -27,12 +27,12 @@ export default function Home() {
               <Link href="/contact" className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px]">
                 Talk to us
               </Link>
-              <a
-                href="#how"
+              <Link
+                href="/scan"
                 className="border border-line px-5 py-3.5 rounded-md font-medium text-[15px] hover:border-ink-soft transition-colors bg-paper"
               >
-                See how it works
-              </a>
+                Check your store free
+              </Link>
             </div>
           </div>
           <div className="relative">

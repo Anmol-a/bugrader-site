@@ -10,7 +10,7 @@ export default function FreeSnapshotBanner() {
         <div className="text-panel-muted text-[13px] mt-1">{freeSnapshot.sub}</div>
       </div>
       <Link
-        href="/contact"
+        href="/scan"
         className="shrink-0 inline-block bg-gold text-[#241703] px-5 py-3 rounded-md font-semibold text-[14.5px] whitespace-nowrap"
       >
         {freeSnapshot.cta}

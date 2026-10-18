@@ -354,7 +354,7 @@ export const pricingTiers = [
 
 export const freeSnapshot = {
   heading: "Not sure if anything's actually broken?",
-  body: "We'll find you one real bug on your live site, free, before you pay for anything.",
-  sub: "No report, no call — just proof, sent straight to you.",
-  cta: "Get a free find",
+  body: "Run the free store check: seven checks on your live Shopify store in about two minutes.",
+  sub: "No sign-up, no call. Beta.",
+  cta: "Check my store free",
 };
