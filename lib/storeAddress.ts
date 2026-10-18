@@ -63,7 +63,8 @@ export function checkAddress(raw: string): AddressCheck {
   if (!s) return { error: ADDRESS_ERRORS.empty };
   let host = "";
   try {
-    host = new URL(/^https?:\/\//.test(s) ? s : `https://${s}`).hostname.replace(/^www\./, "");
+    // any scheme someone pastes (ftp://, HTTPS://, app://) is dropped: we only ever open https://host/
+    host = new URL(`https://${s.replace(/^[a-z][a-z0-9+.-]*:\/\//, "")}`).hostname.replace(/^www\./, "");
   } catch {
     /* below */
   }
