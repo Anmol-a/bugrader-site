@@ -7,11 +7,21 @@ import { useState } from "react";
 export const SCAN_APP = "https://bugradar-dashboard.vercel.app/#/scan";
 
 export { checkAddress } from "@/lib/storeAddress";
-import { checkAddress } from "@/lib/storeAddress";
+import { checkAddress, ADDRESS_ERRORS } from "@/lib/storeAddress";
+
+// the host as typed, so a refused address can still be handed over for "this is my store, check it anyway"
+function hostOf(raw: string): string {
+  try {
+    return new URL(`https://${raw.trim().toLowerCase().replace(/^[a-z][a-z0-9+.-]*:\/\//, "")}`).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+}
 
 export default function ScanStart() {
   const [url, setUrl] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const [disputable, setDisputable] = useState("");
   return (
     <div>
       <form
@@ -19,6 +29,8 @@ export default function ScanStart() {
         onSubmit={(e) => {
           e.preventDefault();
           const c = checkAddress(url);
+          // "not a store" can be wrong for a real Shopify store: the dashboard page explains why and takes the request
+          setDisputable(c.error === ADDRESS_ERRORS.notStore ? hostOf(url) : "");
           if (c.error) return setErr(c.error);
           setErr(null);
           window.location.href = `${SCAN_APP}?u=${encodeURIComponent(c.host!)}`;
@@ -37,7 +49,19 @@ export default function ScanStart() {
           Check my store
         </button>
       </form>
-      {err && <div className="text-alert text-[14px] mt-2">{err}</div>}
+      {err && (
+        <div className="text-alert text-[14px] mt-2">
+          {err}
+          {disputable && (
+            <>
+              {" "}
+              <a className="underline text-ink" href={`${SCAN_APP}?u=${encodeURIComponent(disputable)}`}>
+                Is {disputable} actually your Shopify store? Tell us →
+              </a>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
