@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Forward from "./Forward";
-import { RESULT_APP, descriptionOf, getScan, headlineOf, scoreColour, tested, titleOf } from "@/lib/scanResult";
+import { RESULT_APP, countsOf, descriptionOf, getScan, headlineOf, scoreColour, tested, titleOf } from "@/lib/scanResult";
 
 // bugradar.in/scan/r/<id>: the shareable address of one free check (19 Oct). Shows the score and headline, carries a
 // preview card (title, description, picture from ./opengraph-image), and forwards to the full result on the dashboard.
@@ -28,7 +28,6 @@ export default async function SharedResult({ params }: Props) {
   const s = await getScan(id);
   if (!s) notFound();
   const to = RESULT_APP + s.id;
-  const c = s.summary ?? {};
   return (
     <main>
       <Forward to={to} />
@@ -48,7 +47,7 @@ export default async function SharedResult({ params }: Props) {
           <h1 className="font-display text-[30px] md:text-[40px] font-semibold leading-[1.1] tracking-tight">{headlineOf(s)}</h1>
         </div>
         {tested(s) && (
-          <p className="text-[17px] text-ink-soft mb-8">Score {s.score}/100 · {c.passed ?? 0} of {c.checked ?? 0} checks passed on a computer screen.</p>
+          <p className="text-[17px] text-ink-soft mb-8">Score {s.score}/100 · {countsOf(s)} on a computer screen.</p>
         )}
         <div className="flex flex-col sm:flex-row gap-3">
           <a href={to} className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px] text-center">See the full result →</a>

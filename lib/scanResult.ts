@@ -52,12 +52,23 @@ export function titleOf(s: Scan): string {
   return tested(s) ? `${s.host} scored ${s.score}/100 on BugRadar's free store check` : `${s.host} — BugRadar free store check`;
 }
 
-export function descriptionOf(s: Scan): string {
-  if (!tested(s)) return "BugRadar's free check opens a Shopify store like a shopper and checks the 7 things a customer hits first.";
+/** "8 of 8 checks passed", counted like the result page: the summary counts the checks Radar ran, the result page also
+ *  lists the store's own line ("Store opens and can be tested"), which passes whenever the store could be tested. */
+export function countsOf(s: Scan): string {
   const c = s.summary ?? {};
-  const top = (c.problems ?? []).find((p) => p.status === "failed");
-  const passed = `${c.passed ?? 0} of ${c.checked ?? 0} checks passed.`;
-  return `${headlineOf(s)} ${passed}${top ? ` Top problem: ${top.name}.` : ""} Check your own Shopify store free at bugradar.in/scan.`;
+  return `${(c.passed ?? 0) + 1} of ${(c.checked ?? 0) + 1} checks passed`;
+}
+
+/** The line under the headline: the counts and, when something failed, the first problem. */
+export function detailOf(s: Scan): string {
+  if (!tested(s)) return "BugRadar's free check opens a Shopify store like a shopper and checks the 7 things a customer hits first.";
+  const top = (s.summary?.problems ?? []).find((p) => p.status === "failed");
+  return `${countsOf(s)} on a computer screen.${top ? ` Top problem: ${top.name}.` : ""}`;
+}
+
+export function descriptionOf(s: Scan): string {
+  if (!tested(s)) return detailOf(s);
+  return `${headlineOf(s)} ${detailOf(s)} Check your own Shopify store free at bugradar.in/scan.`;
 }
 
 /** Green 90+, amber 70+, red below: the same bands the dashboard's dial uses. */
