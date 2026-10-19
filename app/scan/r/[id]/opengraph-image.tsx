@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { descriptionOf, getScan, headlineOf, scoreColour, tested } from "@/lib/scanResult";
+import { detailOf, getScan, headlineOf, scoreColour, tested } from "@/lib/scanResult";
 
 // The preview picture for a shared free-check result (WhatsApp, LinkedIn, X): the store, its score and the headline.
 export const size = { width: 1200, height: 630 };
@@ -14,7 +14,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const score = s && tested(s) ? s.score : null;
   const colour = scoreColour(score);
   const headline = s ? headlineOf(s) : "Free Shopify store check";
-  const sub = s ? descriptionOf(s).split(" Check your own")[0] : "Seven checks a customer hits first, in about two minutes.";
+  const sub = s ? detailOf(s) : "Seven checks a customer hits first, in about two minutes.";
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between",
