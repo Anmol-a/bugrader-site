@@ -3,10 +3,17 @@ import ScanStart from "@/components/ScanStart";
 
 // The free store check (beta, 18 Oct 2026). The address box hands off to the live check on the dashboard
 // (bugradar-dashboard.vercel.app/#/scan), which runs Radar from our own server and shows each check as it happens.
+const DESCRIPTION =
+  "Type your Shopify store's address. In about two minutes BugRadar opens it like a shopper and checks the homepage, menu, a collection, a product page, search, missing pages and search-engine tags. Free, no sign-up.";
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bugradar.in"),
   title: "Free store check (beta) — BugRadar",
-  description:
-    "Type your Shopify store's address. In about two minutes BugRadar opens it like a shopper and checks the homepage, menu, a collection, a product page, search, missing pages and search-engine tags. Free, no sign-up.",
+  description: DESCRIPTION,
+  alternates: { canonical: "https://bugradar.in/scan" },
+  // the preview card when the link is shared; the picture is ./opengraph-image.tsx
+  openGraph: { title: "Is anything broken on your store right now? — BugRadar", description: DESCRIPTION,
+    url: "https://bugradar.in/scan", siteName: "BugRadar", type: "website" },
+  twitter: { card: "summary_large_image", title: "Free Shopify store check — BugRadar", description: DESCRIPTION },
 };
 
 const CHECKS: [string, string][] = [
