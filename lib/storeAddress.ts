@@ -51,10 +51,10 @@ const NOT_PUBLIC =
 export type AddressCheck = { host?: string; error?: string };
 
 export const ADDRESS_ERRORS = {
-  empty: "Type your store's address, like yourstore.com",
-  shape: "That doesn't look like a web address. Try yourstore.com",
+  empty: "Type your store's web address: the one shoppers visit.",
+  shape: "That doesn't look like a web address. Type the address shoppers visit, with its ending (.in, .com, .store …).",
   restricted: "We can't check this site.",
-  notStore: "This isn't a Shopify store. BugRadar checks Shopify stores — try your store's own address, like yourstore.com",
+  notStore: "This isn't a Shopify store. BugRadar checks Shopify stores — type your store's own web address.",
   notPublic: "That address isn't a public website.",
 };
 
@@ -71,7 +71,7 @@ export function checkAddress(raw: string): AddressCheck {
   if (!host || !/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(host)) return { error: ADDRESS_ERRORS.shape };
   if (NOT_PUBLIC.test(host) || /^\d+(\.\d+){3}$/.test(host)) return { error: ADDRESS_ERRORS.notPublic };
   if (RESTRICTED.test(host)) return { error: ADDRESS_ERRORS.restricted };
-  // a store's own yourstore.myshopify.com address is a Shopify store; shopify.com itself is not
+  // a store's own <name>.myshopify.com address is a Shopify store; shopify.com itself is not
   if (NOT_STORE_RE.test(host) && !/\.myshopify\.com$/.test(host)) return { error: ADDRESS_ERRORS.notStore };
   return { host };
 }

@@ -40,7 +40,7 @@ export default function ScanStart() {
           className="flex-1 min-w-0 border border-line bg-paper rounded-md px-4 py-3.5 text-[16px] outline-none focus:border-ink-soft"
           inputMode="url"
           autoComplete="url"
-          placeholder="yourstore.com"
+          placeholder="Your store's web address"
           aria-label="Store address"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
@@ -49,6 +49,7 @@ export default function ScanStart() {
           Check my store
         </button>
       </form>
+      {!err && <div className="text-ink-soft text-[13px] mt-2">The address shoppers visit, or your .myshopify.com address. Both work.</div>}
       {err && (
         <div className="text-alert text-[14px] mt-2">
           {err}
