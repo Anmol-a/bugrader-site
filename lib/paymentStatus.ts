@@ -1,13 +1,14 @@
 // Payment providers' status for the public page bugradar.in/payments-status (20 Oct). The dashboard's payment_status
 // function reads each provider's own public status page every 5 minutes into Supabase; anyone may read the result with
-// the publishable key (migration 20 in bugradar-dashboard). Read on the server, refreshed at most once a minute.
+// the publishable key (migration 20 in bugradar-dashboard). Read on the server on every visit (the page is dynamic):
+// a cached copy could show an hour-old "all working" to the first visitor after a quiet spell.
 import { SUPABASE_URL } from "./scanResult";
 
 const PUBLISHABLE_KEY = "sb_publishable_a5wmINCpDlYrv_ve5Tkh7g_JB2XY1UI"; // public by design (same as lib/scanResult.ts)
 
 export type PayState = "ok" | "slow" | "partial" | "down" | "maintenance" | "unknown";
 export type Provider = { id: string; name: string; kind: string; status_url: string | null; what: string | null; sort: number };
-export type Status = { provider_id: string; state: PayState; summary: string | null; checked_at: string | null; failed_reads: number };
+export type Status = { provider_id: string; state: PayState; summary: string | null; checked_at: string | null; read_ok_at: string | null; failed_reads: number };
 export type Problem = { id: string; provider_id: string; state: "slow" | "partial" | "down"; title: string; started_at: string; resolved_at: string | null };
 export type Board = { providers: Provider[]; status: Record<string, Status>; problems: Problem[] } | null;
 
@@ -17,7 +18,7 @@ const BASE = process.env.PAYMENT_STATUS_TEST_URL || SUPABASE_URL;
 async function get<T>(path: string): Promise<T> {
   const r = await fetch(`${BASE}/rest/v1/${path}`, {
     headers: { apikey: PUBLISHABLE_KEY, Accept: "application/json" },
-    next: { revalidate: 60 },
+    cache: "no-store",
   });
   if (!r.ok) throw new Error(`status ${r.status}`);
   return (await r.json()) as T;
@@ -28,7 +29,7 @@ export async function getBoard(): Promise<Board> {
     const since = new Date(Date.now() - 30 * 86400e3).toISOString().slice(0, 10);
     const [providers, status, problems] = await Promise.all([
       get<Provider[]>("payment_providers?select=id,name,kind,status_url,what,sort&order=sort"),
-      get<Status[]>("provider_status?select=provider_id,state,summary,checked_at,failed_reads"),
+      get<Status[]>("provider_status?select=provider_id,state,summary,checked_at,read_ok_at,failed_reads"),
       get<Problem[]>(`provider_incidents?select=id,provider_id,state,title,started_at,resolved_at&started_at=gte.${since}&order=started_at.desc&limit=50`),
     ]);
     return { providers, status: Object.fromEntries(status.map((s) => [s.provider_id, s])), problems };
@@ -38,6 +39,8 @@ export async function getBoard(): Promise<Board> {
 }
 
 export const readable = (p: Provider) => ["statuspage", "instatus", "statping"].includes(p.kind);
+/** We can't say how it's doing: never read, or its page hasn't answered for 30 minutes. */
+export const unreadable = (s?: Status) => !s || s.state === "unknown" || !s.read_ok_at;
 export const WORD: Record<PayState, string> = {
   ok: "Working", slow: "Slow", partial: "Partial outage", down: "Down", maintenance: "Maintenance", unknown: "Not known",
 };

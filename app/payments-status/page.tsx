@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { getBoard, ist, lasted, RANK, readable, WORD, type PayState, type Provider, type Status } from "@/lib/paymentStatus";
+import { getBoard, ist, lasted, RANK, readable, unreadable, WORD, type PayState, type Provider, type Status } from "@/lib/paymentStatus";
 
 // Is India's checkout and payment stack working right now? (20 Oct 2026, beta). Read from each provider's own public
-// status page every 5 minutes by BugRadar; this page refreshes at most once a minute.
-export const revalidate = 60;
+// status page every 5 minutes by BugRadar. Rendered on every visit (20 Oct review: a cached copy showed old status
+// after a quiet spell, and one failed refresh could cache "updating" over a good page).
+export const dynamic = "force-dynamic";
 
 const DESCRIPTION =
   "Live status of the payment providers and checkouts Indian online stores use: Shopify, GoKwik, Razorpay, Shopflo and Juspay. Read from their own status pages every 5 minutes.";
@@ -27,26 +28,28 @@ const TONE: Record<PayState, { dot: string; text: string; edge: string }> = {
 };
 
 function Card({ p, s }: { p: Provider; s?: Status }) {
+  const known = readable(p) && !unreadable(s);
   const live = readable(p);
-  const st: PayState = live ? s?.state ?? "unknown" : "unknown";
+  const st: PayState = known ? s!.state : "unknown";
   const t = TONE[st];
   const label = !live ? (p.kind === "link" ? "Not read yet" : "No status page")
-    : st === "unknown" && (s?.failed_reads ?? 0) >= 6 ? "Can't read their page" : WORD[st];
+    : !known ? (s?.read_ok_at || (s?.failed_reads ?? 0) > 0 ? "Can't read their page" : "Not read yet") : WORD[st];
   const line = !live
     ? p.kind === "link" ? `We can't read ${p.name}'s status page automatically yet.` : `${p.name} doesn't publish a status page we can find.`
+    : !known ? "We can't read their status page right now, so we can't say how it's doing."
     : st === "ok" ? "Taking payments normally" : st === "maintenance" ? "Planned maintenance on their side" : s?.summary ?? WORD[st];
   return (
-    <div className={`border border-line ${live ? `border-t-[3px] ${t.edge}` : ""} rounded-xl bg-paper p-5 flex flex-col gap-1.5`}>
+    <div className={`border border-line ${known ? `border-t-[3px] ${t.edge}` : ""} rounded-xl bg-paper p-5 flex flex-col gap-1.5`}>
       <div className="flex items-center gap-3">
         <span className="font-display font-semibold text-[18px]">{p.name}</span>
-        <span className={`ml-auto shrink-0 whitespace-nowrap inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] ${live ? t.text : "text-ink-soft"}`}>
-          {live && <span className={`w-2 h-2 rounded-full ${t.dot}`} />}{label}
+        <span className={`ml-auto shrink-0 whitespace-nowrap inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] ${known ? t.text : "text-ink-soft"}`}>
+          {known && <span className={`w-2 h-2 rounded-full ${t.dot}`} />}{label}
         </span>
       </div>
       {p.what && <div className="text-[13.5px] text-ink-soft">{p.what}</div>}
       <div className="text-[15px] mt-1">{line}</div>
       <div className="flex items-center gap-3 mt-auto pt-2 text-[13px] text-ink-soft">
-        {live && s?.checked_at && <span>Read {ist(s.checked_at)}</span>}
+        {live && s?.read_ok_at && <span>{known ? "Read" : "Last good read"} {ist(s.read_ok_at)}</span>}
         {p.status_url && <a href={p.status_url} target="_blank" rel="noreferrer" className="ml-auto underline underline-offset-2">Their status page ↗</a>}
       </div>
     </div>
@@ -57,11 +60,15 @@ export default async function PaymentsStatusPage() {
   const board = await getBoard();
   const live = (board?.providers ?? []).filter(readable);
   const other = (board?.providers ?? []).filter((p) => !readable(p));
-  const worst = live.reduce<Provider | null>((w, p) => {
+  const known = live.filter((p) => !unreadable(board!.status[p.id]));
+  const cantRead = live.filter((p) => unreadable(board!.status[p.id]));
+  const worst = known.reduce<Provider | null>((w, p) => {
     const s = board!.status[p.id]?.state ?? "unknown";
     return RANK[s] > RANK[w ? board!.status[w.id]?.state ?? "ok" : "ok"] ? p : w;
   }, null);
-  const bad = live.filter((p) => RANK[board!.status[p.id]?.state ?? "ok"] > 0);
+  const bad = known.filter((p) => RANK[board!.status[p.id]?.state ?? "ok"] > 0);
+  // "as of": the oldest good reading among the providers the headline speaks for
+  const asOf = known.map((p) => board!.status[p.id]?.read_ok_at).filter((x): x is string => !!x).sort()[0] ?? null;
   const name = (id: string) => board?.providers.find((p) => p.id === id)?.name ?? id;
 
   return (
@@ -86,7 +93,7 @@ export default async function PaymentsStatusPage() {
               The status board is updating. Please try again in a minute.
             </div>
           ) : (
-            <div className={`mt-10 rounded-xl p-6 md:p-7 bg-panel text-panel-ink border-l-4 ${worst ? (board.status[worst.id]?.state === "down" ? "border-alert" : "border-gold") : "border-clear"}`}>
+            <div className={`mt-10 rounded-xl p-6 md:p-7 bg-panel text-panel-ink border-l-4 ${worst ? (board.status[worst.id]?.state === "down" ? "border-alert" : "border-gold") : cantRead.length ? "border-gold" : "border-clear"}`}>
               {bad.length ? (
                 <>
                   <div className="font-display text-[22px] md:text-[26px] font-semibold">
@@ -99,11 +106,20 @@ export default async function PaymentsStatusPage() {
                   </ul>
                   <p className="text-panel-muted text-[14.5px] mt-3">If your checkout uses {bad.length === 1 ? "it" : "one of these"}, some customers may not be able to pay right now.</p>
                 </>
-              ) : (
+              ) : known.length ? (
                 <div className="font-display text-[22px] md:text-[26px] font-semibold flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-clear shrink-0" />All {live.length} providers we read report no problems
+                  <span className="w-3 h-3 rounded-full bg-clear shrink-0" />
+                  {known.length === live.length ? `All ${known.length} providers we read report no problems` : `${known.length} of ${live.length} providers report no problems`}
                 </div>
+              ) : (
+                <div className="font-display text-[22px] md:text-[26px] font-semibold">We can&apos;t read the providers&apos; status pages right now</div>
               )}
+              {cantRead.length > 0 && (
+                <p className="text-panel-muted text-[14.5px] mt-3">
+                  We can&apos;t read {cantRead.map((p) => p.name).join(", ")}&apos;s status page{cantRead.length > 1 ? "s" : ""} right now, so we can&apos;t say how {cantRead.length > 1 ? "they are" : "it is"} doing.
+                </p>
+              )}
+              {asOf && <p className="text-panel-muted text-[13px] mt-3">As of {ist(asOf)} India time · read every 5 minutes</p>}
             </div>
           )}
         </div>
