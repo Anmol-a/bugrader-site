@@ -11,6 +11,11 @@ export default function Footer() {
           BugRadar
         </div>
         <p className="text-[13.5px] text-ink-soft">Catch failures before your customers do.</p>
+        <p className="text-[13.5px] text-ink-soft">
+          <a href="/scan" className="underline underline-offset-2">Free store check</a>
+          <span className="mx-2 opacity-50">·</span>
+          <a href="/payments-status" className="underline underline-offset-2">Payment providers status</a>
+        </p>
         <p className="text-[13.5px] text-ink-soft opacity-65">© 2026 BugRadar</p>
       </div>
     </footer>
