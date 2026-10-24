@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
 import { contactEmail } from "@/lib/content";
 
@@ -20,10 +19,10 @@ export default function Contact() {
     <section className="py-16 md:py-20">
       <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-16">
         <div>
-          <SectionHeading
-            title="Get early access"
-            description="BugRadar's Shopify app is in beta. Tell us your store and we'll start its daily checks, free while the beta lasts."
-          />
+          <h1 className="font-display text-[30px] md:text-[34px] font-semibold mb-2.5">Get early access</h1>
+          <p className="text-[15.5px] leading-relaxed text-ink-soft max-w-[56ch] mb-11">
+            BugRadar&apos;s Shopify app is in beta. Tell us your store and we&apos;ll start its daily checks, free while the beta lasts.
+          </p>
           <ol className="flex flex-col gap-4 mb-10">
             {NEXT.map(([b, t], i) => (
               <li key={b} className="grid grid-cols-[28px_minmax(0,1fr)] gap-3 text-[15px]">
