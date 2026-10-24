@@ -109,17 +109,17 @@ export default function ScanPage() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">
-                Coming soon
+                Beta
               </span>
             </div>
             <h2 className="font-display text-[26px] md:text-[30px] font-semibold mb-4 max-w-[20ch]">
-              The free check is seven checks, once. Daily monitoring goes much further.
+              The free check is seven checks, once. Daily checks go much further.
             </h2>
             <p className="text-ink-soft text-[15.5px] leading-relaxed max-w-[48ch]">
-              BugRadar is building continuous monitoring for online stores: the same robot shopper, every day, on
-              computers and phones, with an alert and a screenshot the moment a journey breaks. Leave your email on your
-              result page to get early access.
+              Daily checks are running in beta: the same robot shopper, every day, on computers and phones, with an
+              email the moment something breaks. Free while BugRadar is in beta.
             </p>
+            <a href="/contact" className="inline-block mt-5 bg-ink text-paper px-5 py-3 rounded-md font-medium text-[14.5px]">Get early access</a>
           </div>
           <ul className="grid gap-3">
             {DAILY.map((d) => (

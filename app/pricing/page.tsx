@@ -19,6 +19,12 @@ const BETA = [
   "Dashboard with every check, screenshot and a shareable report",
 ];
 
+const FAQ: [string, string][] = [
+  ["Will I be charged when the beta ends?", "No. Nothing is charged unless you pick a paid plan yourself. The free daily check stays."],
+  ["How will paid plans be billed?", "Through Shopify, on your usual Shopify bill. Cancel any time from your Shopify admin."],
+  ["I run more than one store.", "Each store gets its own daily checks. Tell us your stores when you ask for early access."],
+];
+
 const LATER = [
   "Checks every few hours instead of once a day",
   "Our own check of your payment step",
@@ -71,12 +77,15 @@ export default function Pricing() {
               </ul>
             </div>
             <div className="bg-paper-alt border border-line rounded-xl p-6">
-              <h2 className="font-display text-[19px] font-semibold mb-1">Need a person to test something?</h2>
-              <p className="text-[14px] text-ink-soft mb-4">
-                Before a big sale or a site move, our QA team can test your store by hand, or build automation for flows
-                beyond the storefront.
-              </p>
-              <Link href="/services" className="text-[14px] font-medium underline underline-offset-4">Custom QA projects</Link>
+              <h2 className="font-display text-[19px] font-semibold mb-3">Billing questions</h2>
+              <dl className="flex flex-col gap-3 text-[14px]">
+                {FAQ.map(([q, a]) => (
+                  <div key={q}>
+                    <dt className="font-medium">{q}</dt>
+                    <dd className="text-ink-soft leading-relaxed">{a}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>

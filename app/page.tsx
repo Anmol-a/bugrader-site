@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Ban, KeyRound, Bot, Store, Timer, BellRing } from "lucide-react";
 import StoreMock from "@/components/StoreMock";
+import StoreDemo from "@/components/StoreDemo";
 import ScenarioReplay from "@/components/ScenarioReplay";
 import SectionHeading from "@/components/SectionHeading";
 import { checkAreas, indiaChecks, homeFaq } from "@/lib/product";
@@ -30,7 +31,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="relative max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-[1.05fr_1fr] gap-14 md:gap-16 items-center pt-14 pb-20 md:pt-24 md:pb-28">
+        <div className="relative max-w-[1180px] mx-auto px-6 sm:px-8 grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-14 items-center pt-14 pb-20 md:pt-20 md:pb-24">
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-5">
               <span className="w-2 h-2 rounded-full bg-gold" />
@@ -54,8 +55,8 @@ export default function Home() {
             </div>
             <p className="text-[13px] text-ink-soft mt-4">Free check in 2 minutes · no sign-up · never places an order</p>
           </div>
-          <div className="min-w-0 md:pl-6">
-            <StoreMock />
+          <div className="min-w-0">
+            <StoreDemo />
           </div>
         </div>
       </section>
@@ -89,6 +90,15 @@ export default function Home() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* What you see */}
+      <section className="border-t border-line py-20">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid lg:grid-cols-[1fr_1.05fr] gap-12 items-center">
+          <SectionHeading title="What you see every morning"
+            description="Your store's score, every check on a computer and on a phone, and what broke in plain words. Inside your Shopify admin, with the same thing in your inbox." />
+          <div className="min-w-0 lg:pl-6 pb-8"><StoreMock /></div>
         </div>
       </section>
 
