@@ -17,7 +17,7 @@ import {
 } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Services — BugRadar",
+  title: "Custom QA projects — BugRadar",
   description: "Test automation, RPA, data automation, process automation, alerting and continuous monitoring.",
 };
 
@@ -31,8 +31,8 @@ export default function Services() {
       <section className="pt-16 pb-10">
         <div className="max-w-[1180px] mx-auto px-8">
           <PageIntro
-            title="Services"
-            description="Production QA monitoring is the core of what we do. Everything here builds on that one job."
+            title="Custom QA projects"
+            description="BugRadar's product is the daily store check for Shopify. Some teams also need people: hands-on testing before a big sale or a site move, or automation for apps, APIs and back-office flows. Our QA team takes those on as projects."
           />
         </div>
       </section>
