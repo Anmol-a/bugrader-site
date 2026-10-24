@@ -5,12 +5,11 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/scan", label: "Free check" },
-  { href: "/services", label: "Services" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#checks", label: "What we check" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/payments-status", label: "Payment status" },
+  { href: "/contact", label: "Early access" },
 ];
 
 export default function Nav() {
@@ -48,10 +47,10 @@ export default function Nav() {
 
           <div className="hidden md:flex items-center gap-5">
             <Link
-              href="/contact"
+              href="/scan"
               className="inline-block bg-ink text-paper px-[18px] py-2.5 rounded font-medium text-sm whitespace-nowrap"
             >
-              Talk to us
+              Check your store free
             </Link>
           </div>
 
@@ -79,6 +78,9 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
+            <Link href="/scan" onClick={() => setOpen(false)} className="text-ink font-medium">
+              Check your store free
+            </Link>
           </div>
         )}
       </div>

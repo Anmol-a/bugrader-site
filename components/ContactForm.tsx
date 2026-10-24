@@ -73,7 +73,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="border border-line rounded-lg p-6 text-[15px]">
-        <span className="font-display font-semibold">Signal received.</span> We read every message ourselves — expect a reply within one business day.
+        <span className="font-display font-semibold">Got it.</span> We read every request ourselves and will reply within one business day to set up your store&apos;s daily checks.
       </div>
     );
   }
@@ -94,7 +94,7 @@ export default function ContactForm() {
       </div>
       <div>
         <label htmlFor="email" className="block text-[13.5px] text-ink-soft mb-1.5">
-          Work email
+          Email
         </label>
         <input
           id="email"
@@ -106,18 +106,20 @@ export default function ContactForm() {
       </div>
       <div>
         <label htmlFor="company" className="block text-[13.5px] text-ink-soft mb-1.5">
-          Company (optional)
+          Your store&apos;s address
         </label>
         <input
           id="company"
           name="company"
           type="text"
+          required
+          placeholder="yourstore.in"
           className="w-full border border-line rounded-md px-3.5 py-2.5 text-[15px] bg-white focus:border-ink-soft"
         />
       </div>
       <div>
         <span className="block text-[13.5px] text-ink-soft mb-1.5">
-          Which of these matter most on your site?
+          What would hurt most if it broke?
         </span>
         <div className="flex flex-wrap gap-2">
           {JOURNEY_OPTIONS.map(({ label, icon: Icon }) => (
@@ -159,7 +161,7 @@ export default function ContactForm() {
       </div>
       <div>
         <label htmlFor="message" className="block text-[13.5px] text-ink-soft mb-1.5">
-          Your site, and anything else we should know?
+          Anything else we should know? (a sale coming up, a new theme, a past problem)
         </label>
         <textarea
           id="message"
@@ -175,7 +177,7 @@ export default function ContactForm() {
         disabled={status === "submitting"}
         className="bg-ink text-paper px-5 py-3 rounded-md font-medium text-[15px] disabled:opacity-60 self-start"
       >
-        {status === "submitting" ? "Sending…" : "Send message"}
+        {status === "submitting" ? "Sending…" : "Request early access"}
       </button>
     </form>
   );

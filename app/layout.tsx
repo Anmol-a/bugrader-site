@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "BugRadar — Catch failures before your customers do",
+  title: "BugRadar — daily store checks for Shopify",
   description:
-    "BugRadar runs your checkout, cart, coupon and login flows continuously in production, confirms real failures, and alerts your team with evidence attached.",
+    "BugRadar checks your Shopify store like a shopper every day, on a computer and a phone, and emails you the moment something breaks.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

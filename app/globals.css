@@ -27,3 +27,5 @@ body {
     animation: none !important;
   }
 }
+/* decorative glows and wide cards must never make the page scroll sideways on phones */
+html, body { overflow-x: clip; }
