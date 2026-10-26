@@ -5,7 +5,7 @@ import StoreMock from "@/components/StoreMock";
 import StoreDemo from "@/components/StoreDemo";
 import ScenarioReplay from "@/components/ScenarioReplay";
 import SectionHeading from "@/components/SectionHeading";
-import { checkAreas, indiaChecks, homeFaq } from "@/lib/product";
+import { checkAreas, homeFaq } from "@/lib/product";
 
 export const metadata: Metadata = {
   title: "BugRadar — daily store checks for Shopify",
@@ -118,22 +118,6 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* India */}
-      <section className="py-20 border-b border-line">
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-[1fr_1.3fr] gap-12 items-start">
-          <SectionHeading title="Made for Indian stores"
-            description="Generic monitors check that a page loads. BugRadar also checks the parts Indian shoppers rely on before they buy." />
-          <div className="grid sm:grid-cols-2 gap-4">
-            {indiaChecks.map((c) => (
-              <div key={c.title} className="border border-line rounded-xl p-5 bg-white">
-                <h3 className="font-semibold text-[15.5px] mb-1.5">{c.title}</h3>
-                <p className="text-[14px] text-ink-soft leading-relaxed">{c.body}</p>
               </div>
             ))}
           </div>
