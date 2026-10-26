@@ -12,13 +12,6 @@ export const checkAreas: { title: string; items: string[] }[] = [
   { title: "Trust & Google", items: ["Shipping, returns, privacy and contact pages open", "A missing page answers \"not found\" (404)", "Search-engine title, description and sharing picture are set"] },
 ];
 
-export const indiaChecks: { title: string; body: string }[] = [
-  { title: "Pincode checker", body: "Your delivery-pincode box answers for a real pincode, on a computer and a phone." },
-  { title: "Cash on Delivery wording", body: "What the product page says about COD agrees with what the pincode checker answers." },
-  { title: "WhatsApp chat button", body: "The button leads to a real phone number. BugRadar reads it and never opens WhatsApp or sends a message." },
-  { title: "Payment providers", body: "Shopify, Razorpay, GoKwik, Shopflo and Juspay status pages read every 5 minutes, with an email when one you use has a problem." },
-];
-
 export const homeFaq: [string, string][] = [
   ["Does BugRadar place orders or pay for anything?", "No. It opens checkout to see that it works, and stops there. Nothing is typed into checkout and nothing is paid, so there are no test orders to cancel."],
   ["Will it slow down my store?", "No. Each check visits a few pages, one at a time, about as much as a single shopper browsing for a few minutes."],

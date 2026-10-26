@@ -28,7 +28,7 @@ const CHECKS: [string, string][] = [
 
 const STEPS: [string, string][] = [
   ["Type your address", "The one shoppers visit, or your .myshopify.com address. No sign-up, no app to install."],
-  ["Watch it run", "Radar opens your store in a real browser, from India, and ticks off each check live."],
+  ["Watch it run", "Radar opens your store in a real browser and ticks off each check live."],
   ["Get the result", "A score out of 100 and each check in plain words, with the page to open when something's wrong."],
 ];
 

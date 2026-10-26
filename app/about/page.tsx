@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Ban, Smartphone, MapPin, BellOff } from "lucide-react";
+import { Ban, Smartphone, Settings, BellOff } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 
 export const metadata: Metadata = {
@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 
 const FACTS: [string, string][] = [
   ["800+", "Shopify stores checked while building BugRadar"],
-  ["72", "real problems on 53 Indian stores, each re-checked live on 25 Oct 2026"],
+  ["72", "real problems on 53 Shopify stores, each re-checked live on 25 Oct 2026"],
   ["35", "shopper checks on every store, on a computer and a phone"],
 ];
 
 const RULES = [
   { icon: Ban, title: "It looks, it never buys", body: "Checkout is opened to see that it works, never filled in or paid. No orders, no test charges, no forms sent." },
   { icon: Smartphone, title: "A real browser, a real phone screen", body: "Most shoppers are on phones, so every check runs twice: once at computer size, once at phone size." },
-  { icon: MapPin, title: "Made for Indian stores", body: "Pincode checkers, Cash on Delivery wording, WhatsApp buttons and Indian payment providers are checked, not skipped." },
+  { icon: Settings, title: "Nothing to set up", body: "BugRadar finds your menu, collections, products and cart by itself from your store's address. No code, no theme changes, no tests to write." },
   { icon: BellOff, title: "Quiet until it matters", body: "You hear from BugRadar when something breaks or gets fixed, plus one short morning summary. A store that didn't load is looked at again before anyone is told." },
 ];
 
