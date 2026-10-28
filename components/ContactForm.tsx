@@ -48,6 +48,7 @@ export default function ContactForm() {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
+      website: (form.elements.namedItem("website") as HTMLInputElement).value, // hidden; robots fill it
       journeys,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
@@ -80,6 +81,10 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-[480px]">
+      {/* robot trap: hidden from people and screen readers, only scripts fill it */}
+      <div aria-hidden="true" className="absolute w-px h-px overflow-hidden opacity-0 pointer-events-none" style={{ clip: "rect(0 0 0 0)" }}>
+        <label>Website<input type="text" name="website" tabIndex={-1} autoComplete="off" defaultValue="" /></label>
+      </div>
       <div>
         <label htmlFor="name" className="block text-[13.5px] text-ink-soft mb-1.5">
           Name
