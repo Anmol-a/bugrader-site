@@ -14,7 +14,7 @@ const sections: Section[] = [
   {
     title: "Who we are",
     body: [
-      "BugRadar (bugradar.in) checks online stores the way a shopper would and tells the store's team when something breaks. BugRadar is in beta.",
+      "BugRadar (bugradar.in) checks online stores the way a shopper would and tells the store's team when something breaks.",
       "For anything in this policy, write to hello@bugradar.in. We answer within 7 days.",
     ],
   },

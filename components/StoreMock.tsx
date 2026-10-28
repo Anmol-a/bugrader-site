@@ -23,7 +23,7 @@ const RESULTS: Record<"desktop" | "phone", { score: number; rows: Row[] }> = {
   phone: {
     score: 89,
     rows: [
-      { ok: true, name: "Phone menu", note: "opens, 12 links" },
+      { ok: true, name: "Mobile menu", note: "opens, 12 links" },
       { ok: false, name: "WhatsApp button", note: "number has only 9 digits" },
       { ok: true, name: "Product page", note: "name, price, picture, buy button" },
       { ok: true, name: "Size switch", note: "price updates to ₹1,099" },
@@ -67,13 +67,13 @@ export default function StoreMock() {
             </div>
           </div>
 
-          <div className="inline-flex rounded-lg border border-panel-line p-0.5 mb-4" role="tablist" aria-label="Device">
+          <div className="inline-flex rounded-lg border border-panel-line p-0.5 mb-4" role="tablist" aria-label="Browser">
             {(["desktop", "phone"] as const).map((d) => (
               <button key={d} role="tab" aria-selected={device === d} onClick={() => setDevice(d)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12.5px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold ${
                   device === d ? "bg-panel-2 text-panel-ink" : "text-panel-muted hover:text-panel-ink"}`}>
                 {d === "desktop" ? <Monitor size={13} /> : <Smartphone size={13} />}
-                {d === "desktop" ? "Computer" : "Phone"}
+                {d === "desktop" ? "Desktop" : "Mobile"}
               </button>
             ))}
           </div>
@@ -100,7 +100,7 @@ export default function StoreMock() {
           <span className="w-8 h-8 rounded-md bg-paper-alt flex items-center justify-center shrink-0"><Mail size={15} /></span>
           <span className="min-w-0">
             <span className="block text-[12px] text-ink-soft">Email · 9:04 AM</span>
-            <span className="block text-[13.5px] font-medium leading-snug">🔴 {broken.name} broke on {device === "desktop" ? "computers" : "phones"}</span>
+            <span className="block text-[13.5px] font-medium leading-snug">🔴 {broken.name} broke in {device === "desktop" ? "desktop" : "mobile"} browsers</span>
           </span>
         </div>
       )}

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import ScanStart from "@/components/ScanStart";
 
-// The free store check (beta, 18 Oct 2026). The address box hands off to the live check on the dashboard
+// The free store check (launched 18 Oct 2026). The address box hands off to the live check on the dashboard
 // (bugradar-dashboard.vercel.app/#/scan), which runs Radar from our own server and shows each check as it happens.
 const DESCRIPTION =
   "Type your Shopify store's address. In about two minutes BugRadar opens it like a shopper and checks the homepage, menu, a collection, a product page, search, missing pages and search-engine tags. Free, no sign-up.";
 export const metadata: Metadata = {
   metadataBase: new URL("https://bugradar.in"),
-  title: "Free store check (beta) — BugRadar",
+  title: "Free store check — BugRadar",
   description: DESCRIPTION,
   alternates: { canonical: "https://bugradar.in/scan" },
   // the preview card when the link is shared; the picture is ./opengraph-image.tsx
@@ -35,10 +35,10 @@ const STEPS: [string, string][] = [
 const DAILY: string[] = [
   "A full shopper journey: home → collection → product → cart → checkout button",
   "Add to cart, change quantity, remove",
-  "Everything again on a phone screen",
+  "Everything again in a mobile browser",
   "Pincode delivery checker and coupon box",
   "Sizes, colours and sold-out products",
-  "Every day, with an alert the moment something breaks",
+  "Every day (every 4 hours on Pro), with an alert the moment a check catches a problem",
 ];
 
 export default function ScanPage() {
@@ -46,14 +46,11 @@ export default function ScanPage() {
     <main>
       {/* Hero: the address box */}
       <section className="relative overflow-hidden">
-        <div className="max-w-[1180px] mx-auto px-8 grid md:grid-cols-[1.15fr_1fr] gap-14 items-start py-16 md:py-24">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-[1.15fr_1fr] gap-14 items-start py-16 md:py-24">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-gold" />
               <span className="text-[13px] text-ink-soft">Free store check</span>
-              <span className="ml-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">
-                Beta
-              </span>
             </div>
             <h1 className="font-display text-[34px] md:text-[48px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-[16ch]">
               Is anything broken on your store right now?
@@ -105,21 +102,16 @@ export default function ScanPage() {
 
       {/* What BugRadar is building */}
       <section className="border-t border-line py-16 bg-paper-alt">
-        <div className="max-w-[1180px] mx-auto px-8 grid md:grid-cols-2 gap-12 items-start">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-12 items-start">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">
-                Beta
-              </span>
-            </div>
             <h2 className="font-display text-[26px] md:text-[30px] font-semibold mb-4 max-w-[20ch]">
               The free check is seven checks, once. Daily checks go much further.
             </h2>
             <p className="text-ink-soft text-[15.5px] leading-relaxed max-w-[48ch]">
-              Daily checks are running in beta: the same robot shopper, every day, on computers and phones, with an
-              email the moment something breaks. Free while BugRadar is in beta.
+              The same robot shopper, every day, in desktop and mobile browsers, with an email the moment a check
+              catches a problem. Free for the core checks; Pro checks everything every 4 hours.
             </p>
-            <a href="/contact" className="inline-block mt-5 bg-ink text-paper px-5 py-3 rounded-md font-medium text-[14.5px]">Get early access</a>
+            <a href="/contact" className="inline-block mt-5 bg-ink text-paper px-5 py-3 rounded-md font-medium text-[14.5px]">Start daily checks</a>
           </div>
           <ul className="grid gap-3">
             {DAILY.map((d) => (
@@ -135,7 +127,7 @@ export default function ScanPage() {
       <section className="border-t border-line py-10">
         <div className="max-w-[1180px] mx-auto px-8">
           <p className="text-[13px] text-ink-soft max-w-[80ch]">
-            BugRadar is in beta: checks are added every week and results can change as Radar learns. The free check works
+            Checks are added every week and results can change as Radar learns. The free check works
             for Shopify stores today; other platforms are coming.
           </p>
         </div>

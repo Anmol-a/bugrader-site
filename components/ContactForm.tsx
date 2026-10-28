@@ -177,7 +177,7 @@ export default function ContactForm() {
         disabled={status === "submitting"}
         className="bg-ink text-paper px-5 py-3 rounded-md font-medium text-[15px] disabled:opacity-60 self-start"
       >
-        {status === "submitting" ? "Sending…" : "Request early access"}
+        {status === "submitting" ? "Sending…" : "Start daily checks"}
       </button>
     </form>
   );

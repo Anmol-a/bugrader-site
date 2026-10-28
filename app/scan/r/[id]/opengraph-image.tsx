@@ -22,7 +22,6 @@ export default async function Image({ params }: { params: Promise<{ id: string }
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, letterSpacing: 4, fontWeight: 700 }}>
           <div style={{ width: 34, height: 34, borderRadius: 34, border: "3px solid #4fc3f7", display: "flex" }} />
           BUGRADAR
-          <div style={{ marginLeft: 8, fontSize: 18, letterSpacing: 3, color: "#f5c542", border: "2px solid #f5c542", borderRadius: 30, padding: "2px 12px" }}>BETA</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 56 }}>
           {score != null && (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getBoard, ist, lasted, RANK, readable, unreadable, WORD, type PayState, type Provider, type Status } from "@/lib/paymentStatus";
 
-// Is India's checkout and payment stack working right now? (20 Oct 2026, beta). Read from each provider's own public
+// Is India's checkout and payment stack working right now? (20 Oct 2026). Read from each provider's own public
 // status page every 5 minutes by BugRadar. Rendered on every visit (20 Oct review: a cached copy showed old status
 // after a quiet spell, and one failed refresh could cache "updating" over a good page).
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ const DESCRIPTION =
   "Live status of the payment providers and checkouts Indian online stores use: Shopify, GoKwik, Razorpay, Shopflo and Juspay. Read from their own status pages every 5 minutes.";
 export const metadata: Metadata = {
   metadataBase: new URL("https://bugradar.in"),
-  title: "Payment providers status, live (beta) — BugRadar",
+  title: "Payment providers status, live — BugRadar",
   description: DESCRIPTION,
   alternates: { canonical: "https://bugradar.in/payments-status" },
   openGraph: { title: "Are India's payment providers working right now? — BugRadar", description: DESCRIPTION,
@@ -74,11 +74,10 @@ export default async function PaymentsStatusPage() {
   return (
     <main>
       <section className="relative overflow-hidden">
-        <div className="max-w-[1180px] mx-auto px-8 py-16 md:py-20">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 py-16 md:py-20">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-gold" />
             <span className="text-[13px] text-ink-soft">Payment providers · live</span>
-            <span className="ml-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">Beta</span>
           </div>
           <h1 className="font-display text-[34px] md:text-[46px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-[22ch]">
             Are India&apos;s payment providers working right now?
@@ -163,15 +162,15 @@ export default async function PaymentsStatusPage() {
       )}
 
       <section className="border-t border-line py-16 bg-paper-alt">
-        <div className="max-w-[1180px] mx-auto px-8 grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
           <div>
             <h2 className="font-display text-[26px] md:text-[30px] font-semibold mb-4 max-w-[24ch]">
               Get an email the moment your provider has a problem
             </h2>
             <p className="text-ink-soft text-[15.5px] leading-relaxed max-w-[52ch]">
               BugRadar finds the providers your store uses, watches their status pages for you, and emails you when one
-              reports a problem, and again when it&apos;s fixed. It comes with daily checks of your store on computers and
-              phones. Free while we&apos;re in beta.
+              reports a problem, and again when it&apos;s fixed. It comes with BugRadar Pro, along with checks of your
+              store every 4 hours in desktop and mobile browsers.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
@@ -185,8 +184,8 @@ export default async function PaymentsStatusPage() {
         <div className="max-w-[1180px] mx-auto px-8">
           <p className="text-[13px] text-ink-soft max-w-[85ch]">
             Information comes from each provider&apos;s own public status page and shows what they report; it can lag behind
-            what customers see. BugRadar isn&apos;t affiliated with these companies. Names belong to their owners. Beta: the
-            list of providers grows as we find more public status pages.
+            what customers see. BugRadar isn&apos;t affiliated with these companies. Names belong to their owners. The list
+            of providers grows as we find more public status pages.
           </p>
         </div>
       </section>
