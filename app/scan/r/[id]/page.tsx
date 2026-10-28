@@ -35,7 +35,6 @@ export default async function SharedResult({ params }: Props) {
         <div className="flex items-center gap-2 mb-5">
           <span className="w-2 h-2 rounded-full bg-gold" />
           <span className="text-[13px] text-ink-soft">{s.host} · free store check</span>
-          <span className="ml-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">Beta</span>
         </div>
         <div className="flex items-center gap-6 mb-6">
           {tested(s) && (
@@ -47,7 +46,7 @@ export default async function SharedResult({ params }: Props) {
           <h1 className="font-display text-[30px] md:text-[40px] font-semibold leading-[1.1] tracking-tight">{headlineOf(s)}</h1>
         </div>
         {tested(s) && (
-          <p className="text-[17px] text-ink-soft mb-8">Score {s.score}/100 · {countsOf(s)} on a computer screen.</p>
+          <p className="text-[17px] text-ink-soft mb-8">Score {s.score}/100 · {countsOf(s)} in a desktop browser.</p>
         )}
         <div className="flex flex-col sm:flex-row gap-3">
           <a href={to} className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px] text-center">See the full result →</a>

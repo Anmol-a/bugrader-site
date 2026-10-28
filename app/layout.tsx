@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "BugRadar — daily store checks for Shopify",
   description:
-    "BugRadar checks your Shopify store like a shopper every day, on a computer and a phone, and emails you the moment something breaks.",
+    "BugRadar checks your Shopify store like a shopper, in desktop and mobile browsers, and alerts you the moment a check catches a problem.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

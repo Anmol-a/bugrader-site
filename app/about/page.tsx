@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 const FACTS: [string, string][] = [
   ["800+", "Shopify stores checked while building BugRadar"],
   ["72", "real problems on 53 Shopify stores, each re-checked live on 25 Oct 2026"],
-  ["35", "shopper checks on every store, on a computer and a phone"],
+  ["Up to 35", "shopper checks per store, each in desktop and mobile browsers"],
 ];
 
 const RULES = [
   { icon: Ban, title: "It looks, it never buys", body: "Checkout is opened to see that it works, never filled in or paid. No orders, no test charges, no forms sent." },
-  { icon: Smartphone, title: "A real browser, a real phone screen", body: "Most shoppers are on phones, so every check runs twice: once at computer size, once at phone size." },
+  { icon: Smartphone, title: "Desktop and mobile browsers", body: "Most shoppers are on mobile, so every check runs twice: once in a desktop browser, once in a mobile browser." },
   { icon: Settings, title: "Nothing to set up", body: "BugRadar finds your menu, collections, products and cart by itself from your store's address. No code, no theme changes, no tests to write." },
-  { icon: BellOff, title: "Quiet until it matters", body: "You hear from BugRadar when something breaks or gets fixed, plus one short morning summary. A store that didn't load is looked at again before anyone is told." },
+  { icon: BellOff, title: "Quiet until it matters", body: "You hear from BugRadar when something breaks or gets fixed, plus a short morning summary on Pro. A store that didn't load is looked at again before anyone is told." },
 ];
 
 export default function About() {
@@ -36,8 +36,8 @@ export default function About() {
               owner hears about it from a customer, or from a quiet drop in sales.
             </p>
             <p className="text-[16px] leading-relaxed text-ink-soft max-w-[58ch]">
-              BugRadar is a robot shopper that walks your Shopify store every day, on a computer and a phone, and tells
-              you the moment something stops working.
+              BugRadar is a robot shopper that walks your Shopify store every day, in desktop and mobile browsers, and
+              tells you the moment a check catches a problem.
             </p>
             <p className="text-[16px] leading-relaxed text-ink-soft max-w-[58ch]">
               It&apos;s built in Mumbai by a QA lead with eight years of production testing, the last six spent building
@@ -76,7 +76,7 @@ export default function About() {
           <h2 className="font-display text-[26px] font-semibold">See it on your own store</h2>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/scan" className="bg-ink text-paper px-5 py-3 rounded-md font-medium text-[15px]">Check your store free</Link>
-            <Link href="/contact" className="border border-line bg-white px-5 py-3 rounded-md font-medium text-[15px]">Get early access</Link>
+            <Link href="/contact" className="border border-line bg-white px-5 py-3 rounded-md font-medium text-[15px]">Start daily checks</Link>
           </div>
         </div>
       </section>

@@ -9,7 +9,7 @@ const links = [
   { href: "/#checks", label: "What we check" },
   { href: "/pricing", label: "Pricing" },
   { href: "/payments-status", label: "Payment status" },
-  { href: "/contact", label: "Early access" },
+  { href: "/contact", label: "Get started" },
 ];
 
 export default function Nav() {
@@ -18,8 +18,8 @@ export default function Nav() {
 
   return (
     <header className="border-b border-line bg-paper sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-8">
-        <nav className="flex items-center justify-between py-6">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-8">
+        <nav className="flex items-center justify-between py-4 md:py-6">
           <Link href="/" className="flex items-center gap-3 font-display font-semibold text-[19px]">
             <svg viewBox="0 0 100 100" className="w-9 h-9 shrink-0" aria-hidden="true">
               <rect width="100" height="100" rx="22" className="fill-panel" />
@@ -55,7 +55,7 @@ export default function Nav() {
           </div>
 
           <button
-            className="md:hidden text-ink"
+            className="md:hidden text-ink p-2 -mr-2 rounded"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label="Toggle navigation menu"

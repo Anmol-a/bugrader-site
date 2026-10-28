@@ -11,7 +11,7 @@ type Spot = { id: SpotId; label: string; check: string; ok: boolean; result: str
 
 const SPOTS: Spot[] = [
   { id: "announce", label: "Announcement bar", check: "The link in the bar opens a real page, not \"Page not found\".", ok: true, result: "/collections/offers opens and lists 24 products" },
-  { id: "menu", label: "Menu", check: "Every menu page opens. On phones, the menu button shows its links.", ok: true, result: "12 of 12 menu pages open" },
+  { id: "menu", label: "Menu", check: "Every menu page opens. In mobile browsers, the menu button shows its links.", ok: true, result: "12 of 12 menu pages open" },
   { id: "product", label: "Photo, name & price", check: "The photo loads, the name and price show, and the price is the same here, on the collection and in the cart.", ok: true, result: "₹649 on the card, this page and the cart" },
   { id: "size", label: "Size", check: "Picking another size updates the price and the buy button.", ok: true, result: "50 ml → ₹1,099" },
   { id: "pincode", label: "Pincode checker", check: "A real pincode (Mumbai 400001) gets an answer, and the Cash on Delivery line agrees with it.", ok: false, result: "400001 answered \"Something went wrong\"" },
@@ -173,7 +173,7 @@ export default function StoreDemo() {
             {!spot.ok && (
               <div className="flex gap-2.5 items-start border border-line rounded-lg px-3 py-2.5">
                 <Mail size={15} className="mt-0.5 shrink-0" />
-                <span className="text-[13px] leading-snug"><span className="text-ink-soft">Email to you, 9:04 AM:</span> 🔴 Pincode checker broke on phones. Open the product page to see it.</span>
+                <span className="text-[13px] leading-snug"><span className="text-ink-soft">Email to you, 9:04 AM:</span> 🔴 Pincode checker broke in mobile browsers. Open the product page to see it.</span>
               </div>
             )}
           </div>
@@ -181,7 +181,7 @@ export default function StoreDemo() {
           <div className="bg-white border border-line rounded-xl p-4">
             <p className="text-[14.5px] leading-relaxed">
               {finished
-                ? "That's one product page. Every day BugRadar walks the whole store like this, on a computer and on a phone, and found 1 problem here."
+                ? "That's one product page. Every day BugRadar walks the whole store like this, in desktop and mobile browsers, and found 1 problem here."
                 : "This is what BugRadar does on your store every day. Tap any part of the page to see what it checks, or watch it shop."}
             </p>
           </div>

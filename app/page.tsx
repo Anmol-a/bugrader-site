@@ -1,22 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Ban, KeyRound, Bot, Store, Timer, BellRing } from "lucide-react";
+import { ShieldCheck, Ban, KeyRound, Bot, Store, Timer, BellRing, Check } from "lucide-react";
 import StoreMock from "@/components/StoreMock";
 import StoreDemo from "@/components/StoreDemo";
 import ScenarioReplay from "@/components/ScenarioReplay";
 import SectionHeading from "@/components/SectionHeading";
+import ProofStrip from "@/components/ProofStrip";
+import FoundSection from "@/components/FoundSection";
+import VideoEmbed from "@/components/VideoEmbed";
+import AppStoreCta from "@/components/AppStoreCta";
+import { APP_STORE_URL, PRO_PRICE, PRO_PERIOD, PRO_TRIAL } from "@/lib/launch";
 import { checkAreas, homeFaq } from "@/lib/product";
 
 export const metadata: Metadata = {
   title: "BugRadar — daily store checks for Shopify",
   description:
-    "BugRadar opens your Shopify store on a computer and a phone every day, walks the menu, collections, product pages and cart like a shopper, and emails you the moment something breaks.",
+    "BugRadar opens your Shopify store in desktop and mobile browsers, walks the menu, collections, product pages and cart like a shopper, and alerts you the moment a check catches a problem. 800+ Shopify stores checked.",
 };
 
 const STEPS = [
-  { icon: Store, title: "Add your store", body: "Install BugRadar on Shopify, or give us your store's address during the beta. No code, no theme changes, no permissions to approve." },
-  { icon: Timer, title: "First check in a minute", body: "Radar opens your store like a shopper, on a computer and on a phone, and ticks off every check. Then it does it again every day." },
-  { icon: BellRing, title: "Email when something breaks", body: "🔴 when a check breaks, 🟢 when it's fixed, and a short 9:00 AM summary. A store that doesn't load is checked again 10 minutes later before you're told." },
+  { icon: Store, title: "Add your store", body: APP_STORE_URL
+      ? "Install BugRadar from the Shopify App Store. No code, no theme changes, no access to your orders or customers."
+      : "Install BugRadar from the Shopify App Store (coming soon), or send us your store's address today. No code, no theme changes." },
+  { icon: Timer, title: "First check in a minute", body: "Radar opens your store like a shopper, in a desktop and a mobile browser, and ticks off every check. Then again every day, or every 4 hours on Pro." },
+  { icon: BellRing, title: "Email or Slack when something breaks", body: "🔴 the moment a check catches a problem, 🟢 when it's fixed. Slack is one click: Add to Slack. A store that doesn't load is checked again 10 minutes later before you're told." },
 ];
 
 const SAFETY = [
@@ -24,6 +31,19 @@ const SAFETY = [
   { icon: ShieldCheck, title: "No Shopify permissions", body: "The app asks for no access to your orders, customers or products. Radar only sees what a shopper sees." },
   { icon: KeyRound, title: "Password stores, safely", body: "Store still behind a password? Its password is kept encrypted and typed only into Shopify's own password page." },
   { icon: Bot, title: "A polite visitor", body: "A few pages per check, one at a time, and it follows your robots.txt. See how the BugRadar bot behaves." },
+];
+
+const TEASER = [
+  { name: "Free", price: "$0", period: "", note: "No time limit", dark: false, items: [
+    "Core checks once a day: store opens, menus, product pages, add to cart, cart",
+    "In desktop and mobile browsers",
+    "Email the moment a check catches a problem, and when it's fixed",
+  ] },
+  { name: "Pro", price: PRO_PRICE, period: PRO_PERIOD, note: PRO_TRIAL, dark: true, items: [
+    "Every check, up to 35, every 4 hours",
+    "Slack alerts, morning summary and a Monday report",
+    "Payment-provider alerts, screenshots and history",
+  ] },
 ];
 
 export default function Home() {
@@ -36,24 +56,28 @@ export default function Home() {
             <div className="flex items-center gap-2 mb-5">
               <span className="w-2 h-2 rounded-full bg-gold" />
               <span className="text-[13px] text-ink-soft">For Shopify stores</span>
-              <span className="ml-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-gold border border-gold/60 rounded-full px-2 py-[1px]">Beta</span>
             </div>
             <h1 className="font-display text-[36px] md:text-[52px] font-semibold leading-[1.08] tracking-tight mb-5 max-w-[15ch] [text-wrap:balance]">
               Your store, checked like a shopper. Every day.
             </h1>
             <p className="text-[17.5px] text-ink-soft max-w-[46ch] mb-8 leading-relaxed">
-              BugRadar opens your Shopify store on a computer and a phone, walks the menu, product pages and cart,
-              and emails you the moment something breaks, before a customer finds it.
+              BugRadar opens your Shopify store in desktop and mobile browsers, walks the menu, product pages and cart,
+              and tells you the moment a check catches a problem, before a customer finds it.
             </p>
             <div className="flex flex-wrap gap-3.5">
               <Link href="/scan" className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px]">
                 Check your store free
               </Link>
-              <Link href="/contact" className="border border-line px-5 py-3.5 rounded-md font-medium text-[15px] hover:border-ink-soft transition-colors bg-paper">
-                Get early access
-              </Link>
+              {APP_STORE_URL ? (
+                <AppStoreCta />
+              ) : (
+                <Link href="/contact" className="border border-line px-5 py-3.5 rounded-md font-medium text-[15px] hover:border-ink-soft transition-colors bg-paper">
+                  Start daily checks
+                </Link>
+              )}
             </div>
             <p className="text-[13px] text-ink-soft mt-4">Free check in 2 minutes · no sign-up · never places an order</p>
+            {!APP_STORE_URL && <AppStoreCta className="mt-5" />}
           </div>
           <div className="min-w-0">
             <StoreDemo />
@@ -61,8 +85,10 @@ export default function Home() {
         </div>
       </section>
 
+      <ProofStrip />
+
       {/* Problem */}
-      <section className="border-t border-line py-20">
+      <section className="py-20">
         <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-2 gap-14 items-center">
           <div>
             <SectionHeading
@@ -73,6 +99,8 @@ export default function Home() {
           <ScenarioReplay />
         </div>
       </section>
+
+      <FoundSection />
 
       {/* How it works */}
       <section id="how" className="border-t border-line py-20 scroll-mt-24">
@@ -90,6 +118,16 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <div className="mt-14 grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-center">
+            <div>
+              <h3 className="font-display text-[22px] font-semibold mb-2">See it work</h3>
+              <p className="text-[15px] text-ink-soft leading-relaxed max-w-[44ch]">
+                A short tour of BugRadar: what it checks on your store and what you get when something
+                breaks.
+              </p>
+            </div>
+            <div className="min-w-0"><VideoEmbed /></div>
+          </div>
         </div>
       </section>
 
@@ -97,7 +135,7 @@ export default function Home() {
       <section className="border-t border-line py-20">
         <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid lg:grid-cols-[1fr_1.05fr] gap-12 items-center">
           <SectionHeading title="What you see every morning"
-            description="Your store's score, every check on a computer and on a phone, and what broke in plain words. Inside your Shopify admin, with the same thing in your inbox." />
+            description="Your store's score, every check in desktop and mobile browsers, and what broke in plain words. Inside your Shopify admin, with alerts by email or Slack." />
           <div className="min-w-0 lg:pl-6 pb-8"><StoreMock /></div>
         </div>
       </section>
@@ -105,8 +143,8 @@ export default function Home() {
       {/* What we check */}
       <section id="checks" className="bg-panel text-panel-ink py-20 scroll-mt-24">
         <div className="max-w-[1180px] mx-auto px-6 sm:px-8">
-          <SectionHeading onDark title="What BugRadar checks, every day"
-            description="Over 30 checks across your whole store, each on a computer and on a phone. Checkout is opened, never filled in or paid." />
+          <SectionHeading onDark title="What BugRadar checks"
+            description="Up to 35 checks across your whole store, each in a desktop and a mobile browser. Free runs the core checks once a day; Pro runs all of them every 4 hours. Checkout is opened, never filled in or paid." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {checkAreas.map((a) => (
               <div key={a.title} className="bg-panel-2 border border-panel-line rounded-xl p-5 flex flex-col gap-3 min-w-0">
@@ -146,17 +184,29 @@ export default function Home() {
 
       {/* Pricing teaser */}
       <section className="bg-paper-alt border-y border-line py-20">
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-8 grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
-          <div>
-            <h2 className="font-display text-[28px] font-semibold mb-2.5">Free while BugRadar is in beta</h2>
-            <p className="text-[15.5px] text-ink-soft leading-relaxed max-w-[52ch]">
-              Daily checks on a computer and a phone, email alerts, the morning summary and payment-provider status, at no cost
-              during the beta. Paid plans with more frequent checks come later, and we&apos;ll tell you before anything changes.
-            </p>
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-8">
+          <SectionHeading title="Start free. Go Pro when you want more." description="Billed through Shopify, on your usual Shopify bill. Cancel any time." />
+          <div className="grid md:grid-cols-2 gap-5">
+            {TEASER.map((p) => (
+              <div key={p.name} className={`rounded-xl p-6 md:p-7 border ${p.dark ? "bg-panel text-panel-ink border-panel-line" : "bg-white border-line"}`}>
+                <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1">
+                  <h3 className="font-display text-[20px] font-semibold">{p.name}</h3>
+                  <div className="font-display"><span className="text-[28px] font-semibold">{p.price}</span><span className={`text-[14px] ${p.dark ? "text-panel-muted" : "text-ink-soft"}`}>{p.period}</span></div>
+                </div>
+                <p className={`text-[13.5px] mb-5 ${p.dark ? "text-gold-soft" : "text-ink-soft"}`}>{p.note}</p>
+                <ul className="flex flex-col gap-2.5">
+                  {p.items.map((it) => (
+                    <li key={it} className="grid grid-cols-[18px_minmax(0,1fr)] gap-2.5 text-[14.5px]">
+                      <Check size={16} className={`mt-[3px] ${p.dark ? "text-gold-soft" : "text-clear"}`} aria-hidden="true" />
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="flex flex-wrap gap-3.5 md:justify-end">
-            <Link href="/pricing" className="border border-line px-5 py-3.5 rounded-md font-medium text-[15px] bg-white hover:border-ink-soft transition-colors">See pricing</Link>
-            <Link href="/contact" className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px]">Get early access</Link>
+          <div className="mt-7 flex justify-center">
+            <Link href="/pricing" className="border border-line px-5 py-3 rounded-md font-medium text-[15px] bg-white hover:border-ink-soft transition-colors">Compare plans</Link>
           </div>
         </div>
       </section>
@@ -183,7 +233,7 @@ export default function Home() {
       <section className="bg-panel py-16 text-center">
         <div className="max-w-[640px] mx-auto px-6 sm:px-8">
           <h2 className="font-display text-[28px] font-semibold text-panel-ink mb-3">Is anything broken on your store right now?</h2>
-          <p className="text-[15px] text-panel-muted mb-7">Find out in about two minutes. Free, no sign-up.</p>
+          <p className="text-[15px] text-panel-muted mb-7">1 in 15 stores we checked had one. Find out in about two minutes. Free, no sign-up.</p>
           <Link href="/scan" className="inline-block bg-gold text-[#241703] px-6 py-3.5 rounded-md font-semibold text-[15px]">
             Check your store free
           </Link>

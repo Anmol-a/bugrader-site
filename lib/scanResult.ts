@@ -63,7 +63,7 @@ export function countsOf(s: Scan): string {
 export function detailOf(s: Scan): string {
   if (!tested(s)) return "BugRadar's free check opens a Shopify store like a shopper and checks the 7 things a customer hits first.";
   const top = (s.summary?.problems ?? []).find((p) => p.status === "failed");
-  return `${countsOf(s)} on a computer screen.${top ? ` Top problem: ${top.name}.` : ""}`;
+  return `${countsOf(s)} in a desktop browser.${top ? ` Top problem: ${top.name}.` : ""}`;
 }
 
 export function descriptionOf(s: Scan): string {
