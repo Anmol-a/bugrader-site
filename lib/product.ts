@@ -20,6 +20,6 @@ export const homeFaq: [string, string][] = [
   ["What can the app see in my store?", "Only your menus, products and live theme, and only to read them. BugRadar never changes your store and never sees orders or customers. Our privacy page lists exactly what it reads and why."],
   ["My store is still behind a password. Can it be checked?", "Yes. Give BugRadar the storefront password once. It's stored encrypted and typed only into Shopify's own password page."],
   ["Is it only for Shopify?", "Yes, for now. BugRadar is built around how Shopify stores work. The free check works on any Shopify store's address."],
-  ["Is the Shopify app in the App Store?", "It was submitted to the Shopify App Store on 28 October 2026 and is in review. Until it's listed, send us your store's address and we'll start its daily checks right away, then move you to the app."],
+  ["Is the Shopify app in the App Store?", "Yes. Search for \"BugRadar: Daily Store Checks\" in the Shopify App Store, or use the Install on Shopify button on this site. Pick Free or Pro when you install, and the daily checks start on their own."],
   ["How much does it cost?", "Free is $0: the core checks once a day, with email alerts. Pro is $19/month after a 14-day free trial: every check every 4 hours, Slack, the morning summary and payment-provider alerts. Billed through Shopify."],
 ];
