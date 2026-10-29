@@ -17,6 +17,7 @@ export const homeFaq: [string, string][] = [
   ["Will it slow down my store?", "No. Each check visits a few pages, one at a time, about as much as a single shopper browsing for a few minutes."],
   ["Do I need to write tests or set anything up?", "No. BugRadar finds your menu, collections, products and cart by itself from your store's address. It works on standard Shopify themes and most custom ones."],
   ["What happens when something breaks?", "The moment a check catches it, you get an email (or a Slack message on Pro) with what broke, in which browser and the page to open. When it's fixed, you get a 🟢 message. On Pro, a short summary also arrives every morning at 9:00."],
+  ["What can the app see in my store?", "Only your menus, products and live theme, and only to read them. BugRadar never changes your store and never sees orders or customers. Our privacy page lists exactly what it reads and why."],
   ["My store is still behind a password. Can it be checked?", "Yes. Give BugRadar the storefront password once. It's stored encrypted and typed only into Shopify's own password page."],
   ["Is it only for Shopify?", "Yes, for now. BugRadar is built around how Shopify stores work. The free check works on any Shopify store's address."],
   ["Is the Shopify app in the App Store?", "It was submitted to the Shopify App Store on 28 October 2026 and is in review. Until it's listed, send us your store's address and we'll start its daily checks right away, then move you to the app."],

@@ -28,7 +28,7 @@ const STEPS = [
 
 const SAFETY = [
   { icon: Ban, title: "Never buys anything", body: "Checkout is opened to see that it works, never filled in or paid. No orders, no test charges." },
-  { icon: ShieldCheck, title: "No Shopify permissions", body: "The app asks for no access to your orders, customers or products. Radar only sees what a shopper sees." },
+  { icon: ShieldCheck, title: "Read-only, no customer data", body: "The app can only read your menus, products and theme, never change them. No access to your orders or customers." },
   { icon: KeyRound, title: "Password stores, safely", body: "Store still behind a password? Its password is kept encrypted and typed only into Shopify's own password page." },
   { icon: Bot, title: "A polite visitor", body: "A few pages per check, one at a time, and it follows your robots.txt. See how the BugRadar bot behaves." },
 ];
