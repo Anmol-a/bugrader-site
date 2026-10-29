@@ -65,12 +65,13 @@ export default function Home() {
               and tells you the moment a check catches a problem, before a customer finds it.
             </p>
             <div className="flex flex-wrap gap-3.5">
-              <Link href="/scan" className="bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px]">
+              {APP_STORE_URL && <AppStoreCta />}
+              <Link href="/scan" className={APP_STORE_URL
+                ? "border border-line px-5 py-3.5 rounded-md font-medium text-[15px] hover:border-ink-soft transition-colors bg-paper"
+                : "bg-ink text-paper px-[22px] py-3.5 rounded-md font-medium text-[15px]"}>
                 Check your store free
               </Link>
-              {APP_STORE_URL ? (
-                <AppStoreCta />
-              ) : (
+              {!APP_STORE_URL && (
                 <Link href="/contact" className="border border-line px-5 py-3.5 rounded-md font-medium text-[15px] hover:border-ink-soft transition-colors bg-paper">
                   Start daily checks
                 </Link>

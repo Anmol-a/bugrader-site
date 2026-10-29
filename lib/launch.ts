@@ -1,8 +1,8 @@
 // Launch facts in one place (28 Oct 2026).
-// The Shopify app was submitted to the App Store on 28 Oct 2026. When it's approved, set APP_STORE_URL to the
-// listing address: every "Coming to the Shopify App Store" note turns into an "Install on Shopify" button.
+// The Shopify app was submitted to the App Store on 28 Oct 2026 and approved on 29 Oct 2026 (published, fully visible).
+// With APP_STORE_URL set, every "Coming to the Shopify App Store" note is an "Install on Shopify" button.
 
-export const APP_STORE_URL: string | null = null;
+export const APP_STORE_URL: string | null = "https://apps.shopify.com/bugradar-daily-store-checks";
 
 // Plans, the same as the app (dashboard web/src/lib/plans.ts). Prices are fine on the website; the no-price rule is
 // only for Shopify listing pictures.
@@ -10,7 +10,7 @@ export const PRO_PRICE = "$19";
 export const PRO_PERIOD = "/month";
 export const PRO_TRIAL = "14-day free trial";
 
-// Promo video (unlisted until approval; switch it to Public on YouTube at launch).
+// Promo video (switch it to Public on YouTube now that the app is listed).
 export const VIDEO_ID = "iNgoipEbpxM";
 
 // Proof numbers, verified 28 Oct 2026 (claude/START-HERE_28oct.md). Use only these.

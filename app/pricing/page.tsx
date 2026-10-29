@@ -62,7 +62,10 @@ export default function Pricing() {
               ))}
             </ul>
             <div className="mt-auto flex flex-wrap gap-3">
-              <Link href="/scan" className="bg-ink text-paper px-5 py-3 rounded-md font-medium text-[14.5px]">Check your store free</Link>
+              {APP_STORE_URL && <AppStoreCta />}
+              <Link href="/scan" className={APP_STORE_URL
+                ? "border border-line px-5 py-3 rounded-md font-medium text-[14.5px] hover:border-ink-soft transition-colors"
+                : "bg-ink text-paper px-5 py-3 rounded-md font-medium text-[14.5px]"}>Check your store free</Link>
               {!APP_STORE_URL && (
                 <Link href="/contact" className="border border-line px-5 py-3 rounded-md font-medium text-[14.5px] hover:border-ink-soft transition-colors">Start daily checks</Link>
               )}
