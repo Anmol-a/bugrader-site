@@ -4,7 +4,7 @@
 // scan_status is a public database function (the result page uses it with the same publishable key).
 
 export const SUPABASE_URL = "https://onijwpgvpojpvgumvfim.supabase.co";
-const PUBLISHABLE_KEY = "sb_publishable_a5wmINCpDlYrv_ve5Tkh7g_JB2XY1UI"; // public by design (it is in the dashboard too)
+export const PUBLISHABLE_KEY = "sb_publishable_a5wmINCpDlYrv_ve5Tkh7g_JB2XY1UI"; // public by design (it is in the dashboard too)
 export const RESULT_APP = "https://bugradar-dashboard.vercel.app/#/scan/";
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
