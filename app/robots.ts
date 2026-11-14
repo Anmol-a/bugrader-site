@@ -5,5 +5,6 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/", disallow: ["/services", "/api/", "/go/"] }],
     host: "https://bugradar.in",
+    sitemap: "https://bugradar.in/sitemap.xml",
   };
 }
